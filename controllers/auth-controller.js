@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const home = async (req, res) => {
   try {
-    res.status(200).send("this is from server");
+    res.status(200).send("this is a response from server");
   } catch (error) {
     console.log(error);
   }
