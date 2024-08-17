@@ -24,7 +24,13 @@ const register = async (req, res) => {
         phone,
         password: hashPassword,
       });
-      res.status(200).json({ msg: userData });
+      res
+        .status(201)
+        .json({
+          msg: userData,
+          token: await register.generateToken(),
+          userId: register._id.toString(),
+        });
     }
   } catch (error) {
     console.log(error);
