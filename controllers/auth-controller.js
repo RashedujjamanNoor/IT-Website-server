@@ -24,17 +24,40 @@ const register = async (req, res) => {
         phone,
         password: hashPassword,
       });
-      res
-        .status(201)
-        .json({
-          msg: userData,
-          token: await register.generateToken(),
-          userId: register._id.toString(),
-        });
+      res.status(201).json({
+        msg: userData,
+        token: await userData.generateToken(),
+        userId: userData._id.toString(),
+      });
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { home, register };
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const existUser = await User.findOne({ email });
+
+    if (!existUser) {
+      res.status(400).json({ message: "Invalid Credential" });
+    } else {
+      const user = await bcrypt.compare(password, existUser.password);
+
+      if (user) {
+        res.status(201).json({
+          msg: "Login Successful",
+          token: await existUser.generateToken(),
+          userId: existUser._id.toString(),
+        });
+      } else {
+        res.status(401).json({ msg: "Invalid Credential" });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { home, register, login };
