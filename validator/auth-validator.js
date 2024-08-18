@@ -1,10 +1,10 @@
 const { z } = require("zod");
 
 const signupSchema = z.object({
-  username: z
-    .string()
-    .trim()
-    .min(4, { message: "Name must be at least 4 charecters" }),
+  // username: z
+  //   .string({ required_error: "Name must be at least 4 cahareacters" })
+  //   .trim()
+  //   .min(4, { message: "Name must be at least 4 charecters" }),
   email: z
     .string({ required_error: "Email is required" })
     .trim()
