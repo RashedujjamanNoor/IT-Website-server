@@ -7,7 +7,7 @@ const services = async (req, res) => {
       res.status(404).json({ msg: "no services available" });
       return;
     }
-    res.status(200).json({ msg: data });
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }

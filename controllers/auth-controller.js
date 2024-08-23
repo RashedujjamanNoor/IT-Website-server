@@ -15,7 +15,7 @@ const register = async (req, res) => {
     const existEmail = await User.findOne({ email: email });
 
     if (existEmail) {
-      res.status(400).json({ msg: "user alrady exist" });
+      res.status(400).json({ message: "user alrady exist" });
     } else {
       const hashPassword = await bcrypt.hash(password, 12);
       const userData = await User.create({
@@ -53,7 +53,7 @@ const login = async (req, res) => {
           userId: existUser._id.toString(),
         });
       } else {
-        res.status(401).json({ msg: "Invalid Credential" });
+        res.status(401).json({ message: "Invalid Credential" });
       }
     }
   } catch (error) {
