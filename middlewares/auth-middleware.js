@@ -6,6 +6,7 @@ const authMiddleware = async (req, res, next) => {
 
   if (!token) {
     console.log("Token does not exist ");
+    return res.json({ message: "acces denied" });
   }
   const jwtToken = token.replace("Bearer", "").trim();
 
