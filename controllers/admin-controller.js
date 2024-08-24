@@ -37,4 +37,39 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getAllContacts, deleteUser };
+const singleUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findById({ _id: id }, { password: 0 });
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userData = req.body;
+    console.log(userData);
+
+    await User.updateOne(
+      { _id: id },
+      {
+        $set: userData,
+      }
+    );
+    return res.status(200).json({ message: "User Updated successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  getAllContacts,
+  deleteUser,
+  singleUser,
+  updateUser,
+};
