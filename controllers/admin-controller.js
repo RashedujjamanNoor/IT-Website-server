@@ -7,6 +7,7 @@ const getAllUsers = async (req, res) => {
     if (!users || users === 0) {
       return res.status(404).json({ message: "No users found" });
     }
+
     return res.status(200).json(users);
   } catch (error) {
     console.log(error);
@@ -25,4 +26,15 @@ const getAllContacts = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getAllContacts };
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await User.deleteOne({ _id: id });
+
+    return res.status(200).json({ message: "user deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllUsers, getAllContacts, deleteUser };
