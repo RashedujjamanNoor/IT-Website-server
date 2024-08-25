@@ -15,6 +15,6 @@ router.get("/users", authMiddleware, adminMiddleware, getAllUsers);
 router.get("/contacts", authMiddleware, adminMiddleware, getAllContacts);
 router.delete("/users/:id", authMiddleware, adminMiddleware, deleteUser);
 router.get("/users/:id", authMiddleware, adminMiddleware, singleUser);
-router.patch("/users/:id", authMiddleware, adminMiddleware, updateUser);
+router.put("/users/:id", authMiddleware, adminMiddleware, updateUser);
 
 module.exports = router;

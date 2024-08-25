@@ -9,8 +9,15 @@ const serviceRoute = require("./router/service-router.js");
 const adminRouter = require("./router/admin-router.js");
 const dbConnection = require("./utils/db.js");
 const errorMiddleware = require("./middlewares/error-middleware.js");
+const corsOptions = {
+  origin: "*", // Replace with specific origin(s) as needed
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Handle preflight requests
+
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
