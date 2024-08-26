@@ -8,6 +8,7 @@ const {
   deleteContact,
   createServices,
   getAllServices,
+  deleteService,
 } = require("../controllers/admin-controller");
 const authMiddleware = require("../middlewares/auth-middleware");
 const adminMiddleware = require("../middlewares/admin-middleware");
@@ -22,5 +23,6 @@ router.get("/users/:id", authMiddleware, adminMiddleware, singleUser);
 router.put("/users/:id", authMiddleware, adminMiddleware, updateUser);
 router.post("/services", authMiddleware, adminMiddleware, createServices);
 router.get("/services", authMiddleware, adminMiddleware, getAllServices);
+router.delete("/services/:id", authMiddleware, adminMiddleware, deleteService);
 
 module.exports = router;

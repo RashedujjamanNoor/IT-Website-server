@@ -103,6 +103,16 @@ const createServices = async (req, res) => {
   }
 };
 
+const deleteService = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Service.deleteOne({ _id: id });
+    return res.status(200).json({ message: "service deleted successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getAllContacts,
@@ -112,4 +122,5 @@ module.exports = {
   deleteContact,
   createServices,
   getAllServices,
+  deleteService,
 };
