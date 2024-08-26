@@ -1,5 +1,6 @@
 const Contact = require("../models/contact-model");
 const User = require("../models/user-model");
+const Service = require("../models/service-model");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -77,6 +78,31 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getAllServices = async (req, res) => {
+  try {
+    const serviceData = await Service.find();
+    if (!serviceData || serviceData === 0) {
+      return res.status(200).json({ message: "no services found now" });
+    }
+
+    return res.status(200).json(serviceData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const createServices = async (req, res) => {
+  try {
+    const response = req.body;
+    console.log(response);
+
+    await Service.create(response);
+    return res.status(200).json({ message: "Service created successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getAllContacts,
@@ -84,4 +110,6 @@ module.exports = {
   singleUser,
   updateUser,
   deleteContact,
+  createServices,
+  getAllServices,
 };
