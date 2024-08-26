@@ -37,6 +37,17 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const deleteContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Contact.deleteOne({ _id: id });
+
+    return res.status(200).json({ message: "contact deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const singleUser = async (req, res) => {
   try {
     const id = req.params.id;
@@ -72,4 +83,5 @@ module.exports = {
   deleteUser,
   singleUser,
   updateUser,
+  deleteContact,
 };
